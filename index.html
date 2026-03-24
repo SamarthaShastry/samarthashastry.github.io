@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Name — Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #f8f7f4;
+      --ink: #1a1a18;
+      --muted: #7a7a72;
+      --accent: #c8622a;
+      --card-bg: #ffffff;
+      --border: #e5e4df;
+      --tag-bg: #f0ede8;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.4rem 4rem;
+      background: rgba(248,247,244,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.2rem;
+      letter-spacing: -0.02em;
+      color: var(--ink);
+      text-decoration: none;
+    }
+    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--ink); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; justify-content: center;
+      padding: 0 4rem;
+      max-width: 1100px;
+      margin: 0 auto;
+      opacity: 0;
+      animation: fadeUp 0.9s ease forwards 0.2s;
+    }
+    .hero-eyebrow {
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(3rem, 7vw, 6.5rem);
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      max-width: 800px;
+    }
+    .hero h1 em {
+      font-style: italic;
+      color: var(--accent);
+    }
+    .hero-sub {
+      margin-top: 2rem;
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 480px;
+      line-height: 1.7;
+    }
+    .hero-cta {
+      margin-top: 3rem;
+      display: flex; gap: 1rem; align-items: center;
+    }
+    .btn-primary {
+      background: var(--ink);
+      color: var(--bg);
+      padding: 0.8rem 2rem;
+      border-radius: 2px;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
+    .btn-ghost {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.85rem;
+      letter-spacing: 0.04em;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
+
+    /* DIVIDER */
+    .divider {
+      width: 100%; height: 1px;
+      background: var(--border);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    /* SECTIONS */
+    section {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 6rem 4rem;
+    }
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 3rem;
+      display: flex; align-items: center; gap: 1rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+
+    /* PROJECT GRID */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 2rem;
+      text-decoration: none;
+      color: inherit;
+      display: flex; flex-direction: column;
+      transition: box-shadow 0.25s, transform 0.25s;
+      opacity: 0;
+      animation: fadeUp 0.7s ease forwards;
+    }
+    .project-card:hover {
+      box-shadow: 0 8px 32px rgba(0,0,0,0.07);
+      transform: translateY(-3px);
+    }
+    .project-type {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.8rem;
+    }
+    .project-card h3 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.3rem;
+      line-height: 1.3;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.8rem;
+    }
+    .project-card p {
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.65;
+      flex: 1;
+    }
+    .project-footer {
+      margin-top: 1.8rem;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .tag {
+      background: var(--tag-bg);
+      color: var(--muted);
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      padding: 0.25rem 0.6rem;
+      border-radius: 2px;
+    }
+    .arrow {
+      color: var(--muted);
+      font-size: 1.1rem;
+      transition: color 0.2s, transform 0.2s;
+    }
+    .project-card:hover .arrow { color: var(--accent); transform: translateX(3px); }
+
+    /* ABOUT */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-left h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.5rem;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+    .about-left h2 em { font-style: italic; color: var(--accent); }
+    .about-right p {
+      font-size: 1rem;
+      color: var(--muted);
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+    }
+    .skills-list {
+      display: flex; flex-wrap: wrap; gap: 0.5rem;
+      margin-top: 1.5rem;
+    }
+    .skill-pill {
+      border: 1px solid var(--border);
+      font-size: 0.78rem;
+      font-weight: 400;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      color: var(--ink);
+    }
+
+    /* CONTACT */
+    .contact-row {
+      display: flex; justify-content: space-between; align-items: flex-end;
+      flex-wrap: wrap; gap: 2rem;
+    }
+    .contact-row h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: clamp(2rem, 4vw, 3.5rem);
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+    .contact-row h2 em { font-style: italic; color: var(--accent); }
+    .contact-links { display: flex; flex-direction: column; gap: 0.6rem; text-align: right; }
+    .contact-links a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+    .contact-links a:hover { color: var(--ink); }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2rem 4rem;
+      display: flex; justify-content: space-between;
+      max-width: 1100px;
+      margin: 0 auto;
+      font-size: 0.78rem;
+      color: var(--muted);
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* stagger cards */
+    .project-card:nth-child(1) { animation-delay: 0.1s; }
+    .project-card:nth-child(2) { animation-delay: 0.2s; }
+    .project-card:nth-child(3) { animation-delay: 0.3s; }
+    .project-card:nth-child(4) { animation-delay: 0.4s; }
+    .project-card:nth-child(5) { animation-delay: 0.5s; }
+    .project-card:nth-child(6) { animation-delay: 0.6s; }
+
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .contact-row { flex-direction: column; align-items: flex-start; }
+      .contact-links { text-align: left; }
+      footer { flex-direction: column; gap: 0.5rem; padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="nav-logo">Your Name</a>
+    <ul class="nav-links">
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <div style="max-width:1100px;margin:0 auto">
+    <div class="hero">
+      <p class="hero-eyebrow">Research · Analytics · Insights</p>
+      <h1>Turning data into <em>decisions</em> that matter.</h1>
+      <p class="hero-sub">
+        A collection of Power BI reports, research papers, and presentations — built to explore, explain, and influence.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn-primary">View Projects</a>
+        <a href="#contact" class="btn-ghost">Get in touch</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider"></div>
+
+  <!-- PROJECTS -->
+  <section id="projects">
+    <p class="section-label">Selected Work</p>
+    <div class="projects-grid">
+
+      <a href="#" class="project-card">
+        <p class="project-type">Power BI Report</p>
+        <h3>Sales Performance Dashboard</h3>
+        <p>An interactive dashboard tracking revenue trends, regional performance, and KPIs across quarters.</p>
+        <div class="project-footer">
+          <div class="tags"><span class="tag">Power BI</span><span class="tag">DAX</span></div>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+
+      <a href="#" class="project-card">
+        <p class="project-type">Research Paper</p>
+        <h3>Consumer Behavior in Digital Markets</h3>
+        <p>A study analyzing patterns in online purchasing behavior across Gen Z and Millennial segments.</p>
+        <div class="project-footer">
+          <div class="tags"><span class="tag">Research</span><span class="tag">Survey</span></div>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+
+      <a href="#" class="project-card">
+        <p class="project-type">Presentation</p>
+        <h3>Market Entry Strategy — APAC</h3>
+        <p>A deck outlining go-to-market recommendations for expanding into Southeast Asian markets.</p>
+        <div class="project-footer">
+          <div class="tags"><span class="tag">PowerPoint</span><span class="tag">Strategy</span></div>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+
+      <a href="#" class="project-card">
+        <p class="project-type">Power BI Report</p>
+        <h3>HR Analytics: Attrition Insights</h3>
+        <p>Visualizing employee turnover, engagement scores, and department-level retention risk.</p>
+        <div class="project-footer">
+          <div class="tags"><span class="tag">Power BI</span><span class="tag">HR Data</span></div>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+
+      <a href="#" class="project-card">
+        <p class="project-type">Research Paper</p>
+        <h3>Impact of Remote Work on Productivity</h3>
+        <p>Quantitative research measuring output metrics before and after remote work policy shifts.</p>
+        <div class="project-footer">
+          <div class="tags"><span class="tag">Research</span><span class="tag">Quantitative</span></div>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+
+      <a href="#" class="project-card">
+        <p class="project-type">Presentation</p>
+        <h3>Sustainability Report 2024</h3>
+        <p>An executive-ready presentation summarizing ESG metrics, carbon targets, and progress milestones.</p>
+        <div class="project-footer">
+          <div class="tags"><span class="tag">ESG</span><span class="tag">PowerPoint</span></div>
+          <span class="arrow">→</span>
+        </div>
+      </a>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <p class="section-label">About</p>
+    <div class="about-grid">
+      <div class="about-left">
+        <h2>Analyst. Researcher. <em>Storyteller.</em></h2>
+      </div>
+      <div class="about-right">
+        <p>
+          I work at the intersection of data and communication — taking complex information and making it clear, visual, and actionable. My work spans Power BI dashboards, research publications, and strategic presentations.
+        </p>
+        <p>
+          I believe great analysis is only half the job. The other half is presenting it in a way that resonates with the audience and drives real decisions.
+        </p>
+        <div class="skills-list">
+          <span class="skill-pill">Power BI</span>
+          <span class="skill-pill">DAX</span>
+          <span class="skill-pill">Excel</span>
+          <span class="skill-pill">Research Design</span>
+          <span class="skill-pill">Data Visualization</span>
+          <span class="skill-pill">PowerPoint</span>
+          <span class="skill-pill">Statistical Analysis</span>
+          <span class="skill-pill">Storytelling</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="contact-row">
+      <h2>Let's work<br/><em>together.</em></h2>
+      <div class="contact-links">
+        <a href="mailto:your@email.com">your@email.com</a>
+        <a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn ↗</a>
+        <a href="https://github.com/yourusername" target="_blank">GitHub ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Your Name</span>
+    <span>Built with GitHub Pages</span>
+  </footer>
+
+</body>
+</html>
