@@ -157,6 +157,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       gap: 1.5rem;
+      align-items: stretch;
     }
     .project-card {
       background: var(--card-bg);
@@ -167,6 +168,7 @@
       color: inherit;
       display: flex; flex-direction: column;
       transition: box-shadow 0.25s, transform 0.25s;
+      align-self: stretch;
       opacity: 0;
       animation: fadeUp 0.7s ease forwards;
     }
