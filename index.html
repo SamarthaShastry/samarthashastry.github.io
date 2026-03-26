@@ -3,504 +3,1018 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Samartha Shastry — Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <title>Samartha Shastry</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Instrument+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #f8f7f4;
-      --ink: #1a1a18;
-      --muted: #7a7a72;
-      --accent: #c8622a;
-      --card-bg: #ffffff;
-      --border: #e5e4df;
-      --tag-bg: #f0ede8;
+      --bg:           #f8f7f4;
+      --bg-off:       #f0ede7;
+      --ink:          #1a1916;
+      --ink-deep:     #0c0b09;
+      --muted:        #7a7670;
+      --muted-light:  #b0aca5;
+      --border:       #ddd9d2;
+      --border-light: #e8e4de;
+      --card:         #ffffff;
+      --tag-bg:       #edeae4;
+      --blue:         #1d4e7a;
+      --blue-light:   #e8f0f8;
+      --sage:         #3a6b50;
+      --sage-light:   #e6f0eb;
+      --amber:        #a0622a;
+      --amber-light:  #f5ece3;
+      --hero-dark:    #0f0e0c;
     }
 
     html { scroll-behavior: smooth; }
-
     body {
       background: var(--bg);
       color: var(--ink);
-      font-family: 'DM Sans', sans-serif;
+      font-family: 'Instrument Sans', sans-serif;
       font-weight: 300;
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
 
-    /* NAV */
+    /* ══════════════════════════════
+       NAV
+    ══════════════════════════════ */
     nav {
-      position: fixed; top: 0; left: 0; right: 0;
-      z-index: 100;
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 1.4rem 4rem;
-      background: rgba(248,247,244,0.85);
-      backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      padding: 1.25rem 5rem;
+      background: rgba(15,14,12,0.96);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      backdrop-filter: blur(20px);
     }
     .nav-logo {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.2rem;
-      letter-spacing: -0.02em;
-      color: var(--ink);
-      text-decoration: none;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 400;
+      color: rgba(255,255,255,0.9);
+      text-decoration: none; letter-spacing: 0.01em;
     }
-    .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+    .nav-links { display: flex; gap: 2.8rem; list-style: none; align-items: center; }
     .nav-links a {
-      color: var(--muted);
+      color: rgba(255,255,255,0.45);
       text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 400;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      font-size: 0.75rem; font-weight: 500;
+      letter-spacing: 0.1em; text-transform: uppercase;
       transition: color 0.2s;
     }
-    .nav-links a:hover { color: var(--ink); }
+    .nav-links a:hover { color: rgba(255,255,255,0.9); }
 
-    /* HERO */
-    .hero {
-      min-height: 100vh;
-      display: flex; flex-direction: column; justify-content: center;
-      padding: 0 4rem;
-      max-width: 1100px;
-      margin: 0 auto;
-      opacity: 0;
-      animation: fadeUp 0.9s ease forwards 0.2s;
+    /* ══════════════════════════════
+       HERO
+    ══════════════════════════════ */
+    .hero-section {
+      position: relative; min-height: 100vh;
+      display: flex; align-items: center;
+      background: var(--hero-dark); overflow: hidden;
     }
-    .hero-eyebrow {
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 1.5rem;
+    .hero-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.022) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.022) 1px, transparent 1px);
+      background-size: 72px 72px;
+      pointer-events: none;
     }
-    .hero h1 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(3rem, 7vw, 6.5rem);
-      line-height: 1.05;
-      letter-spacing: -0.03em;
-      color: var(--ink);
-      max-width: 800px;
+    .hero-section::after {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 70% at 15% 55%, rgba(29,78,122,0.14) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 60% at 85% 25%, rgba(58,107,80,0.10) 0%, transparent 60%),
+        linear-gradient(to bottom, transparent 55%, rgba(15,14,12,0.7) 100%);
+      pointer-events: none;
     }
-    .hero h1 em {
-      font-style: italic;
-      color: var(--accent);
+
+    .hero-content {
+      position: relative; z-index: 10;
+      max-width: 1200px; margin: 0 auto;
+      padding: 8rem 5rem 6rem;
+      width: 100%;
     }
-    .hero-sub {
-      margin-top: 2rem;
-      font-size: 1.1rem;
-      color: var(--muted);
-      max-width: 480px;
-      line-height: 1.7;
+
+    .hero-greeting {
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 2rem;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.1s;
     }
-    .hero-cta {
-      margin-top: 3rem;
-      display: flex; gap: 1rem; align-items: center;
+
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3.6rem, 7vw, 6.8rem);
+      font-weight: 400; line-height: 1.02;
+      letter-spacing: -0.02em;
+      color: rgba(255,255,255,0.95);
+      opacity: 0; animation: fadeUp 0.9s ease forwards 0.2s;
     }
-    .btn-primary {
-      background: var(--ink);
-      color: var(--bg);
-      padding: 0.8rem 2rem;
-      border-radius: 2px;
+    .hero-name em {
+      font-style: italic; font-weight: 400;
+      color: rgba(255,255,255,0.42);
+    }
+
+    .hero-divider {
+      width: 48px; height: 1px;
+      background: rgba(255,255,255,0.18);
+      margin: 2.4rem 0;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.35s;
+    }
+
+    .hero-bio {
+      font-size: 1.02rem; font-weight: 300;
+      color: rgba(255,255,255,0.52);
+      max-width: 600px; line-height: 1.82;
+      opacity: 0; animation: fadeUp 0.9s ease forwards 0.45s;
+    }
+    .hero-bio strong {
+      font-weight: 500; color: rgba(255,255,255,0.82);
+    }
+
+    .hero-actions {
+      margin-top: 3rem; display: flex; gap: 1rem; align-items: center;
+      opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s;
+    }
+    .btn-hero-primary {
+      background: rgba(255,255,255,0.94);
+      color: var(--hero-dark);
+      padding: 0.85rem 2.2rem; border-radius: 2px;
       text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
+      font-size: 0.76rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
       transition: background 0.2s, transform 0.15s;
     }
-    .btn-primary:hover { background: var(--accent); transform: translateY(-1px); }
-    .btn-ghost {
-      color: var(--muted);
+    .btn-hero-primary:hover { background: white; transform: translateY(-1px); }
+    .btn-hero-ghost {
+      color: rgba(255,255,255,0.4);
       text-decoration: none;
-      font-size: 0.85rem;
-      letter-spacing: 0.04em;
-      border-bottom: 1px solid var(--border);
+      font-size: 0.76rem; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      border-bottom: 1px solid rgba(255,255,255,0.15);
       padding-bottom: 2px;
       transition: color 0.2s, border-color 0.2s;
     }
-    .btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
+    .btn-hero-ghost:hover { color: rgba(255,255,255,0.85); border-color: rgba(255,255,255,0.4); }
 
-    /* DIVIDER */
-    .divider {
-      width: 100%; height: 1px;
-      background: var(--border);
-      max-width: 1100px;
-      margin: 0 auto;
-    }
-
-    /* SECTIONS */
-    section {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 6rem 4rem;
-    }
-    .section-label {
-      font-size: 0.75rem;
-      font-weight: 500;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: var(--muted);
-      margin-bottom: 3rem;
+    .scroll-line {
+      position: absolute; bottom: 3rem; left: 5rem;
       display: flex; align-items: center; gap: 1rem;
+      color: rgba(255,255,255,0.2);
+      font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;
+      z-index: 10;
+    }
+    .scroll-line::after {
+      content: '';
+      width: 40px; height: 1px;
+      background: rgba(255,255,255,0.15);
+    }
+
+    /* ══════════════════════════════
+       LAYOUT SYSTEM
+    ══════════════════════════════ */
+    .page-section {
+      max-width: 1200px; margin: 0 auto;
+      padding: 6rem 5rem;
+    }
+    .full-divider {
+      width: 100%; height: 1px; background: var(--border);
+      max-width: 1200px; margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.18em; text-transform: uppercase;
+      color: var(--muted-light);
+      display: flex; align-items: center; gap: 1.2rem;
+      margin-bottom: 4rem;
     }
     .section-label::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
+      content: ''; flex: 1; height: 1px; background: var(--border);
     }
 
-    /* PROJECT GRID */
+    /* ══════════════════════════════
+       PROJECT CARDS — centred last row
+    ══════════════════════════════ */
     .projects-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 1.5rem;
-      align-items: stretch;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0;
+      background: transparent;
+      border: 1px solid var(--border-light);
     }
     .project-card {
-      background: var(--card-bg);
-      border: 1px solid var(--border);
-      border-radius: 4px;
-      padding: 2rem;
-      text-decoration: none;
-      color: inherit;
+      background: var(--bg);
+      flex: 0 0 33.333%;
+      border-right: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+      padding: 2.2rem;
+      text-decoration: none; color: inherit;
       display: flex; flex-direction: column;
-      transition: box-shadow 0.25s, transform 0.25s;
-      align-self: stretch;
+      transition: background 0.2s;
+      position: relative;
       opacity: 0;
-      animation: fadeUp 0.7s ease forwards;
-      justify-content: flex-start;
+      animation: fadeUp 0.6s ease forwards;
     }
-    .project-card:hover {
-      box-shadow: 0 8px 32px rgba(0,0,0,0.07);
-      transform: translateY(-3px);
-    }
-    .project-type {
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.8rem;
-    }
-    .project-card h3 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 1.3rem;
-      line-height: 1.3;
-      letter-spacing: -0.01em;
-      margin-bottom: 0.8rem;
-    }
-    .project-type {
-  min-height: 1.5rem;
-}
 
-.project-card h3 {
-  margin-top: 0 !important;
-}
+    /* Remove double border on every 3rd card (right edge = grid border) */
+    .project-card:nth-child(3n) { border-right: none; }
+
+    /* Centre the lone last card: give it left border explicitly since
+       the grid outer border won't cover it when pushed right */
+    .project-card:last-child:nth-child(3n+1) {
+      margin-left: auto;
+      margin-right: auto;
+      border-left: 1px solid var(--border-light);
+      border-right: 1px solid var(--border-light);
+      flex: 0 0 calc(33.333% - 2px);
+    }
+
+    .project-card:hover { background: var(--card); }
+    .project-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 2.2rem; right: 2.2rem;
+      height: 2px;
+      background: var(--card-color, transparent);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .project-card:hover::after { transform: scaleX(1); }
+
+    .project-card[data-type="policy"]   { --card-color: var(--blue); }
+    .project-card[data-type="research"] { --card-color: var(--sage); }
+    .project-card[data-type="strategy"] { --card-color: var(--amber); }
+    .project-card[data-type="data"]     { --card-color: var(--blue); }
+    .project-card[data-type="startup"]  { --card-color: var(--amber); }
+
+    .project-type {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      margin-bottom: 1rem; min-height: 1.2rem;
+    }
+    .project-card[data-type="policy"]   .project-type { color: var(--blue); }
+    .project-card[data-type="research"] .project-type { color: var(--sage); }
+    .project-card[data-type="strategy"] .project-type { color: var(--amber); }
+    .project-card[data-type="data"]     .project-type { color: var(--blue); }
+    .project-card[data-type="startup"]  .project-type { color: var(--amber); }
+
+    .project-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.18rem; font-weight: 500;
+      line-height: 1.32; color: var(--ink-deep);
+      margin-bottom: 0.9rem; margin-top: 0;
+    }
     .project-card p {
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.65;
-      flex: 1;
+      font-size: 0.84rem; color: var(--muted);
+      line-height: 1.72; flex: 1; font-weight: 300;
     }
     .project-footer {
       margin-top: 1.8rem;
-      display: flex; justify-content: space-between; align-items: center;
+      display: flex; justify-content: space-between; align-items: flex-end;
     }
-    .tags { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+    .tags { display: flex; gap: 0.35rem; flex-wrap: wrap; }
     .tag {
-      background: var(--tag-bg);
-      color: var(--muted);
-      font-size: 0.7rem;
-      font-weight: 500;
-      letter-spacing: 0.05em;
-      padding: 0.25rem 0.6rem;
-      border-radius: 2px;
+      background: var(--tag-bg); color: var(--muted);
+      font-size: 0.66rem; font-weight: 400;
+      letter-spacing: 0.03em;
+      padding: 0.22rem 0.55rem; border-radius: 2px;
     }
     .arrow {
-      color: var(--muted);
-      font-size: 1.1rem;
+      color: var(--muted-light); font-size: 1rem;
       transition: color 0.2s, transform 0.2s;
+      flex-shrink: 0; margin-left: 0.8rem;
     }
-    .project-card:hover .arrow { color: var(--accent); transform: translateX(3px); }
+    .project-card:hover .arrow { transform: translateX(3px); }
+    .project-card[data-type="policy"]:hover .arrow   { color: var(--blue); }
+    .project-card[data-type="research"]:hover .arrow { color: var(--sage); }
+    .project-card[data-type="strategy"]:hover .arrow { color: var(--amber); }
+    .project-card[data-type="data"]:hover .arrow     { color: var(--blue); }
+    .project-card[data-type="startup"]:hover .arrow  { color: var(--amber); }
 
-    /* ABOUT */
-    .about-grid {
+    .project-card:nth-child(1)  { animation-delay: 0.04s; }
+    .project-card:nth-child(2)  { animation-delay: 0.10s; }
+    .project-card:nth-child(3)  { animation-delay: 0.16s; }
+    .project-card:nth-child(4)  { animation-delay: 0.22s; }
+    .project-card:nth-child(5)  { animation-delay: 0.28s; }
+    .project-card:nth-child(6)  { animation-delay: 0.34s; }
+    .project-card:nth-child(7)  { animation-delay: 0.40s; }
+    .project-card:nth-child(8)  { animation-delay: 0.46s; }
+    .project-card:nth-child(9)  { animation-delay: 0.52s; }
+    .project-card:nth-child(10) { animation-delay: 0.58s; }
+
+    /* ══════════════════════════════
+       PROFILE SECTION
+    ══════════════════════════════ */
+    .profile-layout {
       display: grid;
-      grid-template-columns: 1fr 1.5fr;
-      gap: 4rem;
-      align-items: start;
+      grid-template-columns: 300px 1fr;
+      gap: 5rem; align-items: start;
     }
-    .about-left h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: 2.5rem;
-      line-height: 1.2;
-      letter-spacing: -0.02em;
+
+    .profile-sidebar {}
+
+    .photo-slot {
+      width: 100%; aspect-ratio: 1;
+      max-width: 200px;
+      background: var(--bg-off);
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 2rem;
+      overflow: hidden;
+      position: relative;
     }
-    .about-left h2 em { font-style: italic; color: var(--accent); }
-    .about-right p {
-      font-size: 1rem;
-      color: var(--muted);
-      line-height: 1.8;
+    .photo-slot img { width: 100%; height: 100%; object-fit: cover; }
+    .photo-slot-label {
+      position: absolute; inset: 0;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 0.6rem;
+      color: var(--muted-light);
+      font-size: 0.7rem; font-weight: 400; letter-spacing: 0.08em; text-transform: uppercase;
+    }
+    .photo-slot-label svg { width: 24px; height: 24px; opacity: 0.4; }
+    #photo-input { display: none; }
+    .photo-slot { cursor: pointer; transition: border-color 0.2s; }
+    .photo-slot:hover { border-color: var(--muted); }
+
+    .sidebar-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.55rem; font-weight: 400;
+      color: var(--ink-deep); line-height: 1.25;
+      margin-bottom: 0.4rem;
+    }
+    .sidebar-title {
+      font-size: 0.8rem; font-weight: 400;
+      color: var(--muted); line-height: 1.5;
+      margin-bottom: 2rem;
+    }
+
+    .sidebar-links { display: flex; flex-direction: column; gap: 0; margin-bottom: 2rem; }
+    .sidebar-link {
+      display: flex; align-items: center; gap: 0.55rem;
+      font-size: 0.8rem; font-weight: 400;
+      color: var(--muted); text-decoration: none;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid var(--border-light);
+      transition: color 0.2s, padding-left 0.2s;
+    }
+    .sidebar-link:first-child { border-top: 1px solid var(--border-light); }
+    .sidebar-link:hover { color: var(--ink); padding-left: 0.3rem; }
+    .sidebar-link svg { width: 14px; height: 14px; opacity: 0.45; flex-shrink: 0; }
+
+    .resume-btn {
+      display: flex; align-items: center; justify-content: center; gap: 0.5rem;
+      width: 100%;
+      padding: 0.85rem;
+      background: var(--ink-deep); color: rgba(255,255,255,0.88);
+      text-decoration: none;
+      font-size: 0.74rem; font-weight: 500;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      border-radius: 2px;
+      transition: background 0.2s, transform 0.15s;
+      margin-top: 1rem;
+    }
+    .resume-btn:hover { background: var(--blue); transform: translateY(-1px); }
+    .resume-btn svg { width: 13px; height: 13px; }
+
+    .profile-main {}
+
+    .profile-headline {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.4rem; font-weight: 400;
+      line-height: 1.18; letter-spacing: -0.01em;
+      color: var(--ink-deep); margin-bottom: 2.2rem;
+    }
+    .profile-headline em { font-style: italic; font-weight: 400; color: var(--amber); }
+
+    .profile-bio p {
+      font-size: 0.97rem; font-weight: 300;
+      color: var(--muted); line-height: 1.85;
       margin-bottom: 1.2rem;
     }
-    .skills-list {
-      display: flex; flex-wrap: wrap; gap: 0.5rem;
-      margin-top: 1.5rem;
+    .profile-bio p strong { font-weight: 500; color: var(--ink); }
+    .profile-bio p:last-child { margin-bottom: 0; }
+
+    .caps-section { margin-top: 3.5rem; }
+    .caps-heading {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.16em; text-transform: uppercase;
+      color: var(--muted-light); margin-bottom: 1.6rem;
+      display: flex; align-items: center; gap: 1rem;
     }
-    .skill-pill {
-      border: 1px solid var(--border);
-      font-size: 0.78rem;
-      font-weight: 400;
-      padding: 0.3rem 0.8rem;
-      border-radius: 20px;
-      color: var(--ink);
+    .caps-heading::after { content: ''; flex: 1; height: 1px; background: var(--border-light); }
+    .caps-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0 1.5rem; }
+    .cap-group { padding-bottom: 0.5rem; }
+    .cap-group-name {
+      font-size: 0.68rem; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      margin-bottom: 0.7rem; padding-bottom: 0.5rem;
+      border-bottom: 2px solid;
+    }
+    .cap-group:nth-child(1) .cap-group-name { color: var(--blue);  border-color: var(--blue); }
+    .cap-group:nth-child(2) .cap-group-name { color: var(--sage);  border-color: var(--sage); }
+    .cap-group:nth-child(3) .cap-group-name { color: var(--amber); border-color: var(--amber); }
+    .cap-items { display: flex; flex-direction: column; }
+    .cap-item {
+      font-size: 0.83rem; font-weight: 300; color: var(--ink);
+      padding: 0.32rem 0; border-bottom: 1px solid var(--border-light);
+    }
+    .cap-item:last-child { border-bottom: none; }
+
+    /* ══════════════════════════════
+       EXPERIENCE SECTION — with logo slots
+    ══════════════════════════════ */
+    .exp-layout { display: flex; flex-direction: column; gap: 0; }
+    .exp-item {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: 0 3rem;
+      padding: 2.4rem 0;
+      border-bottom: 1px solid var(--border-light);
+    }
+    .exp-item:first-child { border-top: 1px solid var(--border-light); }
+    .exp-meta {}
+
+    /* Logo slot */
+    .org-logo-slot {
+      width: 52px; height: 52px;
+      border: 1px dashed var(--border);
+      border-radius: 6px;
+      background: var(--bg-off);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.2s;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .org-logo-slot:hover { border-color: var(--muted); }
+    .org-logo-slot img { width: 100%; height: 100%; object-fit: contain; padding: 6px; }
+    .org-logo-slot .logo-placeholder {
+      font-size: 0.55rem; font-weight: 600; letter-spacing: 0.06em;
+      text-transform: uppercase; color: var(--muted-light);
+      text-align: center; line-height: 1.3; padding: 4px;
+    }
+    .logo-input { display: none; }
+
+    .exp-period {
+      font-size: 0.72rem; font-weight: 500;
+      letter-spacing: 0.06em; color: var(--muted-light);
+      margin-bottom: 0.3rem; text-transform: uppercase;
+    }
+    .exp-org {
+      font-size: 0.86rem; font-weight: 600;
+      color: var(--ink); margin-bottom: 0.15rem;
+    }
+    .exp-org-sub {
+      font-size: 0.76rem; font-weight: 400;
+      color: var(--muted-light); margin-bottom: 0;
     }
 
-    /* CONTACT */
-    .contact-row {
-      display: flex; justify-content: space-between; align-items: flex-end;
-      flex-wrap: wrap; gap: 2rem;
+    .exp-body {}
+    .exp-role {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem; font-weight: 500;
+      color: var(--ink-deep); margin-bottom: 1rem;
     }
-    .contact-row h2 {
-      font-family: 'DM Serif Display', serif;
-      font-size: clamp(2rem, 4vw, 3.5rem);
-      letter-spacing: -0.03em;
-      line-height: 1.1;
+    .exp-bullets {
+      list-style: none; display: flex; flex-direction: column; gap: 0.6rem;
     }
-    .contact-row h2 em { font-style: italic; color: var(--accent); }
-    .contact-links { display: flex; flex-direction: column; gap: 0.6rem; text-align: right; }
-    .contact-links a {
-      color: var(--muted);
-      text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.2s;
+    .exp-bullets li {
+      font-size: 0.86rem; font-weight: 300;
+      color: var(--muted); line-height: 1.72;
+      padding-left: 1.2rem; position: relative;
     }
-    .contact-links a:hover { color: var(--ink); }
+    .exp-bullets li::before {
+      content: '—';
+      position: absolute; left: 0;
+      color: var(--muted-light); font-size: 0.75rem;
+    }
+    .exp-bullets li strong { font-weight: 500; color: var(--ink); }
 
-    /* FOOTER */
+    /* ══════════════════════════════
+       LEADERSHIP — with logo slots
+    ══════════════════════════════ */
+    .por-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0;
+      background: transparent;
+      border: 1px solid var(--border-light);
+    }
+    .por-card {
+      background: var(--bg);
+      flex: 0 0 calc(33.333% - 2px);
+      min-width: 260px;
+      padding: 1.8rem 2rem;
+      border-right: 1px solid var(--border-light);
+      border-bottom: 1px solid var(--border-light);
+      transition: background 0.2s;
+    }
+    /* Remove double right border on 3rd card of each row */
+    .por-card:nth-child(3n) { border-right: none; }
+    /* Cards starting a new row after row 1 need their own left border (not covered by grid edge) */
+    .por-card:nth-child(n+4):nth-child(3n+1) { border-left: 1px solid var(--border-light); }
+    .por-card:hover { background: var(--card); }
+
+    .por-logo-slot {
+      width: 40px; height: 40px;
+      border: 1px dashed var(--border);
+      border-radius: 5px;
+      background: var(--bg-off);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 1rem;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.2s;
+    }
+    .por-logo-slot:hover { border-color: var(--muted); }
+    .por-logo-slot img { width: 100%; height: 100%; object-fit: contain; padding: 4px; }
+    .por-logo-slot .logo-placeholder {
+      font-size: 0.5rem; font-weight: 600; letter-spacing: 0.05em;
+      text-transform: uppercase; color: var(--muted-light);
+      text-align: center; line-height: 1.3; padding: 3px;
+    }
+
+    .por-role {
+      font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--sage); margin-bottom: 0.6rem;
+    }
+    .por-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem; font-weight: 500;
+      color: var(--ink-deep); margin-bottom: 0.4rem; line-height: 1.3;
+    }
+    .por-org {
+      font-size: 0.78rem; font-weight: 400;
+      color: var(--muted-light); margin-bottom: 0.9rem;
+    }
+    .por-desc {
+      font-size: 0.82rem; font-weight: 300;
+      color: var(--muted); line-height: 1.65;
+    }
+
+    /* ══════════════════════════════
+       FOOTER
+    ══════════════════════════════ */
     footer {
       border-top: 1px solid var(--border);
-      padding: 2rem 4rem;
-      display: flex; justify-content: space-between;
-      max-width: 1100px;
-      margin: 0 auto;
-      font-size: 0.78rem;
-      color: var(--muted);
+      padding: 2rem 5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      max-width: 1200px; margin: 0 auto;
+      font-size: 0.72rem; color: var(--muted-light); font-weight: 300;
     }
+    .footer-right { display: flex; gap: 2rem; }
+    .footer-right a { color: var(--muted-light); text-decoration: none; transition: color 0.2s; }
+    .footer-right a:hover { color: var(--ink); }
 
+    /* ══════════════════════════════
+       ANIMATIONS
+    ══════════════════════════════ */
     @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
+      from { opacity: 0; transform: translateY(16px); }
       to   { opacity: 1; transform: translateY(0); }
     }
 
-    /* stagger cards */
-    .project-card:nth-child(1) { animation-delay: 0.1s; }
-    .project-card:nth-child(2) { animation-delay: 0.2s; }
-    .project-card:nth-child(3) { animation-delay: 0.3s; }
-    .project-card:nth-child(4) { animation-delay: 0.4s; }
-    .project-card:nth-child(5) { animation-delay: 0.5s; }
-    .project-card:nth-child(6) { animation-delay: 0.6s; }
-
-    @media (max-width: 768px) {
-      nav { padding: 1.2rem 1.5rem; }
+    /* ══════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════ */
+    @media (max-width: 960px) {
+      nav { padding: 1.2rem 2rem; }
       .nav-links { display: none; }
-      .hero, section { padding-left: 1.5rem; padding-right: 1.5rem; }
-      .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-      .contact-row { flex-direction: column; align-items: flex-start; }
-      .contact-links { text-align: left; }
-      footer { flex-direction: column; gap: 0.5rem; padding: 1.5rem; }
+      .hero-content { padding: 8rem 2rem 5rem; }
+      .page-section { padding: 4rem 2rem; }
+      .profile-layout { grid-template-columns: 1fr; gap: 3rem; }
+      .photo-slot { max-width: 140px; }
+      .exp-item { grid-template-columns: 1fr; gap: 0.8rem; }
+      .caps-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      footer { padding: 1.5rem 2rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+      .project-card { flex: 0 0 calc(50% - 1px); }
+    }
+    @media (max-width: 600px) {
+      .hero-name { font-size: 3.2rem; }
+      .caps-grid { grid-template-columns: 1fr; }
+      .project-card { flex: 0 0 100%; }
     }
   </style>
 </head>
 <body>
 
-  <!-- NAV -->
-  <nav>
-    <a href="#" class="nav-logo">Samartha Shastry</a>
-    <ul class="nav-links">
-      <li><a href="#projects">Projects</a></li>
-      <li><a href="#about">About</a></li>
-      <li><a href="#contact">Contact</a></li>
-    </ul>
-  </nav>
+<!-- ═══ NAV ═══ -->
+<nav>
+  <a href="#" class="nav-logo">Samartha Shastry</a>
+  <ul class="nav-links">
+    <li><a href="#work">Projects</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#profile">Profile</a></li>
+  </ul>
+</nav>
 
-  <!-- HERO -->
-  <div style="max-width:1100px;margin:0 auto">
-    <div class="hero">
-      <p class="hero-eyebrow">Research · Analytics · Insights</p>
-      <h1>Turning data into <em>decisions</em> that matter.</h1>
-      <p class="hero-sub">
-        A collection of Power BI reports, research papers, and presentations — built to explore, explain, and influence.
-      </p>
-      <div class="hero-cta">
-        <a href="#projects" class="btn-primary">View Projects</a>
-        <a href="#contact" class="btn-ghost">Get in touch</a>
-      </div>
+<!-- ═══ HERO ═══ -->
+<section class="hero-section">
+  <div class="hero-content">
+    <p class="hero-greeting">Hello — I'm</p>
+    <h1 class="hero-name">Samartha Shastry<br/><em>Economist &amp; Strategist.</em></h1>
+    <div class="hero-divider"></div>
+    <p class="hero-bio">
+      I turn <strong>economic data into strategic insight</strong> — and strategic insight into decisions 
+      that hold. A final-year M.Sc. Economics student equally at home in regression models and policy 
+      rooms, I work at the intersection of <strong>Analysis, Strategy, and Policy</strong>.
+    </p>
+    <div class="hero-actions">
+      <a href="#work" class="btn-hero-primary">View Projects</a>
+      <a href="#profile" class="btn-hero-ghost">Profile &amp; CV</a>
     </div>
   </div>
+  <div class="scroll-line">Scroll</div>
+</section>
 
-  <div class="divider"></div>
+<!-- ═══ PROJECTS ═══ -->
+<section class="page-section" id="work">
+  <p class="section-label">Projects</p>
+  <div class="projects-grid">
 
-  <!-- PROJECTS -->
-  <section id="projects">
-    <p class="section-label">Selected Work</p>
-    <div class="projects-grid">
+    <a href="https://baseblr-my.sharepoint.com/:u:/g/personal/215pge039_base_ac_in/IQB0ChWO88bPRZinNjnjKxySAcYMV9uNDpPtbPaJVqWsO8w?e=Xwhp2A" class="project-card" data-type="data">
+      <p class="project-type">Power BI Report</p>
+      <h3>Where to Win — India GCC Location Strategy Dashboard</h3>
+      <p>An interactive decision support tool for evaluating and shortlisting Tier-2 GCC locations across India. Assesses 20 cities across 25 metrics spanning five strategic dimensions with configurable priority weights by GCC type.</p>
+      <div class="project-footer">
+        <div class="tags"><span class="tag">Power BI</span><span class="tag">GCC</span><span class="tag">Strategy Consulting</span></div>
+        <span class="arrow">→</span>
+      </div>
+    </a>
 
-     <a href="https://baseblr-my.sharepoint.com/:u:/g/personal/215pge039_base_ac_in/IQB0ChWO88bPRZinNjnjKxySAcYMV9uNDpPtbPaJVqWsO8w?e=Xwhp2A" class="project-card">
-       <p class="project-type">Power BI Report</p>
-       <h3>Where to Win — India GCC Location Strategy Dashboard</h3>
-       <p>An interactive decision support tool for evaluating and shortlisting Tier-2 GCC locations across India. Assesses 20 cities across 25 metrics spanning five strategic dimensions with configurable priority weights by GCC type.</p>
-       <div class="project-footer">
-         <div class="tags"><span class="tag">Power BI</span><span class="tag">GCC</span><span class="tag">Strategy Consulting</span><span class="tag">Advance Analytics</span></div>
-         <span class="arrow">→</span>
-       </div>
-     </a>
+    <a href="https://baseblr-my.sharepoint.com/:b:/g/personal/215pge039_base_ac_in/IQDk2XKf5f3oS6mNu00iSTc5AdYGKxmPOECM-Lzq6c-IoqY?e=qJi1HU" class="project-card" data-type="research">
+      <p class="project-type">Research Paper</p>
+      <h3>The Impact of Global Production Realignment on India: China+1 Strategy</h3>
+      <p>An econometric study analyzing how the China+1 strategy affects India through FDI inflows and manufacturing exports using OLS models (1990–2024), highlighting complementarity with China and delayed trade diversion effects.</p>
+      <div class="project-footer">
+        <div class="tags"><span class="tag">Econometrics</span><span class="tag">International Economics</span><span class="tag">OLS</span></div>
+        <span class="arrow">→</span>
+      </div>
+    </a>
 
-      <a href="https://baseblr-my.sharepoint.com/:b:/g/personal/215pge039_base_ac_in/IQDk2XKf5f3oS6mNu00iSTc5AdYGKxmPOECM-Lzq6c-IoqY?e=qJi1HU" class="project-card">
-        <p class="project-type">Research Paper</p>
-        <h3>The Impact of Global Production Realignment on India: An Empirical
-Analysis of the China+1 Strategy</h3>
-        <p>An econometric study analyzing how the China+1 strategy affects India through FDI inflows and manufacturing exports using OLS models (1990–2024), highlighting complementarity with China and delayed trade diversion effects.</p>
-        <div class="project-footer">
-          <div class="tags"><span class="tag">Research</span><span class="tag">International Economics</span><span class="tag">Macroeconomics</span><span class="tag">Econometric Analysis</span></div>
-          <span class="arrow">→</span>
+    <a href="https://baseblr-my.sharepoint.com/:f:/g/personal/215pge039_base_ac_in/IgDE7CGbyTU6SoKpuSulqU1pAaSkJbyzeEmLbAVrl_jEJBU?e=jwct3U" class="project-card" data-type="policy">
+      <p class="project-type">Policy Reports</p>
+      <h3>KDEM Beyond Bengaluru — Cluster Vision Reports 2025</h3>
+      <p>Contributed to official vision reports for three Karnataka tech clusters under the Karnataka Digital Economy Mission's Beyond Bengaluru initiative — covering strategic roadmaps for IT/ITES, GCCs, ESDM, and startup ecosystems.</p>
+      <div class="project-footer">
+        <div class="tags"><span class="tag">Policy</span><span class="tag">Government</span><span class="tag">KDEM</span></div>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a href="https://baseblr-my.sharepoint.com/:b:/g/personal/215pge039_base_ac_in/IQDIKVieHr0NRLDylKhaATOsAZft-yagH6nM4JEFf_P61kk?e=z32QAL" class="project-card" data-type="research">
+      <p class="project-type">Research Project</p>
+      <h3>The Failure of Silicon Valley Bank: A Balance Sheet Analysis</h3>
+      <p>A comprehensive study applying balance sheet analytics to the systemic and managerial flaws behind SVB's collapse in March 2023, examining interest rate risk, liquidity mismanagement, and capital adequacy.</p>
+      <div class="project-footer">
+        <div class="tags"><span class="tag">Financial Analysis</span><span class="tag">Macroeconomics</span></div>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a href="https://baseblr-my.sharepoint.com/:f:/g/personal/215pge039_base_ac_in/IgA64Ei2Sda1T7DwMu-B7RNmAVc4_Lgj8Al-iBR3KTvlv2w?e=LvHwyh" class="project-card" data-type="startup">
+      <p class="project-type">Startup Pitch Deck</p>
+      <h3>AeroGrid — AI-Powered Drone Traffic Management</h3>
+      <p>A pitch deck for AeroGrid, a UAV traffic management startup proposing an AI and blockchain-powered platform to manage India's rapidly growing drone ecosystem with real-time routing, DGCA compliance, and defence integration.</p>
+      <div class="project-footer">
+        <div class="tags"><span class="tag">Startup</span><span class="tag">AI</span><span class="tag">Market Analysis</span></div>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a href="https://baseblr-my.sharepoint.com/:b:/g/personal/215pge039_base_ac_in/IQDEHpHOcmKVRr_TFn2Uj-bMATikhD-Lm5jRZW1F8FjjS2k?e=JJoJDl" class="project-card" data-type="strategy">
+      <p class="project-type">Presentation Deck</p>
+      <h3>PeeSafe — International Expansion Strategy</h3>
+      <p>A strategic market entry analysis for PeeSafe's global expansion into the US, Europe, and GCC markets, integrating PESTEL analysis, Ansoff Matrix, distribution strategy, and financial projections.</p>
+      <div class="project-footer">
+        <div class="tags"><span class="tag">Market Entry</span><span class="tag">Global Expansion</span></div>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a href="https://baseblr-my.sharepoint.com/:b:/g/personal/215pge039_base_ac_in/IQBcgqqwBYPnQ5ldHfqOAzzASh_6JHiJ87nf6t14HEIumE?e=2ckevr" class="project-card" data-type="policy">
+      <p class="project-type">Market Research Deck</p>
+      <h3>Corporate Training Market in Saudi Arabia</h3>
+      <p>A comprehensive market analysis of Saudi Arabia's corporate training sector — market size, growth drivers, segmentation, emerging trends, and strategic recommendations aligned with Vision 2030.</p>
+      <div class="project-footer">
+        <div class="tags"><span class="tag">Market Research</span><span class="tag">Vision 2030</span></div>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a href="https://baseblr-my.sharepoint.com/:f:/g/personal/215pge039_base_ac_in/IgAjWp2e_MdYR7K0q2RDPL0hAUKZuzQUJz-7fNBFEb9Lz-A?e=GuQoaq" class="project-card" data-type="startup">
+      <p class="project-type">Business Plan &amp; Pitch Deck</p>
+      <h3>Cycleit — Campus Micro-Mobility Startup</h3>
+      <p>A full business plan and pitch deck for Cycleit, a solar-powered e-cycle rental service for Indian university campuses — market research, financial projections, product design, and a mobile app prototype.</p>
+      <div class="project-footer">
+        <div class="tags"><span class="tag">Business Plan</span><span class="tag">Micro-Mobility</span></div>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a href="https://baseblr-my.sharepoint.com/:b:/g/personal/215pge039_base_ac_in/IQBrs5mod2JIQ6O9sm3RNqXVAfD8PAKdCSPDeNANNdCzV9Y?e=Q0nwHF" class="project-card" data-type="research">
+      <p class="project-type">Research Project</p>
+      <h3>Impact of Biases on Fintech Adoption Among Merchants</h3>
+      <p>A behavioural study across 90+ vendors in Bengaluru exploring how FOMO and Social Proof influence fintech adoption among small business owners and street vendors.</p>
+      <div class="project-footer">
+        <div class="tags"><span class="tag">Behavioural Economics</span><span class="tag">Primary Research</span></div>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+
+    <a href="https://baseblr-my.sharepoint.com/:b:/g/personal/215pge039_base_ac_in/IQCQ7TOJACoJSL-rZZWPSMyCAaw-ri0ukOpdCUVKxEGbCTs?e=rf4JTm" class="project-card" data-type="data">
+      <p class="project-type">Research Project</p>
+      <h3>Forecasting India's External Commercial Borrowings</h3>
+      <p>Built and compared five time series forecasting models in R — including ARIMA — on monthly ECB data (2020–2023), evaluating performance using RMSE and MAE metrics.</p>
+      <div class="project-footer">
+        <div class="tags"><span class="tag">Time Series</span><span class="tag">R</span><span class="tag">ARIMA</span></div>
+        <span class="arrow">→</span>
+      </div>
+    </a>
+
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- ═══ EXPERIENCE ═══ -->
+<section class="page-section" id="experience">
+  <p class="section-label">Experience</p>
+  <div class="exp-layout">
+
+    <!-- KDEM -->
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="org-logo-slot" onclick="triggerLogoUpload('logo-kdem')" title="Click to add logo">
+          <input type="file" id="logo-kdem" class="logo-input" accept="image/*" onchange="previewLogo(this)"/>
+          <div class="logo-placeholder">Add Logo</div>
         </div>
+        <div class="exp-period">Jun – Jul 2025</div>
+        <div class="exp-org">Karnataka Digital Economy Mission</div>
+        <div class="exp-org-sub">Government of Karnataka</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">Summer Intern — Strategy &amp; Policy</div>
+        <ul class="exp-bullets">
+          <li>Shaped Karnataka's digital economy narrative by developing <strong>3 cluster vision documents</strong> spanning 14 districts — translating complex district-level economic data into clear, forward-looking strategic frameworks and actionable policy playbooks.</li>
+          <li>Drove high-impact stakeholder engagement at scale: coordinated cluster development events that brought together <strong>1,200+ delegates, 40+ global policymakers</strong>, and 100+ startups — handling end-to-end planning, logistics, and stakeholder management with precision.</li>
+          <li>Crafted <strong>executive-ready content</strong> for keynote speakers and senior government delegates — including research-backed talking points and polished presentations for high-profile public forums.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Zomato -->
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="org-logo-slot" onclick="triggerLogoUpload('logo-zomato')" title="Click to add logo">
+          <input type="file" id="logo-zomato" class="logo-input" accept="image/*" onchange="previewLogo(this)"/>
+          <div class="logo-placeholder">Add Logo</div>
+        </div>
+        <div class="exp-period">Jun – Aug 2024</div>
+        <div class="exp-org">Zomato</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">Acquisition Intern</div>
+        <ul class="exp-bullets">
+          <li>Onboarded <strong>95+ restaurant partners</strong> in a competitive cohort environment — earning a <strong>Top 1/400 Intern rank</strong> weekly on performance metrics, a distinction across the entire intern batch.</li>
+          <li>Engineered smarter lead generation workflows that <strong>cut the acquisition cycle by 20%</strong>, improving pipeline velocity and conversion efficiency.</li>
+          <li>Handpicked for the <strong>Super Ninja Cohort</strong> — an advanced mentorship track in business strategy, negotiation, and high-stakes client relations reserved for the best-performing interns.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Trippr -->
+    <div class="exp-item">
+      <div class="exp-meta">
+        <div class="org-logo-slot" onclick="triggerLogoUpload('logo-trippr')" title="Click to add logo">
+          <input type="file" id="logo-trippr" class="logo-input" accept="image/*" onchange="previewLogo(this)"/>
+          <div class="logo-placeholder">Add Logo</div>
+        </div>
+        <div class="exp-period">May – Aug 2023</div>
+        <div class="exp-org">Trippr</div>
+      </div>
+      <div class="exp-body">
+        <div class="exp-role">Business Development Intern</div>
+        <ul class="exp-bullets">
+          <li>Expanded Trippr's national footprint by onboarding <strong>40+ partners across 55 accommodation facilities</strong>, strengthening the platform's supply network in key travel corridors.</li>
+          <li>Built <strong>strategic tourism clusters across 5 states and 2 union territories</strong>, laying the groundwork for regional market penetration; authored 12 research-based industry publications to support business development outreach.</li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- ═══ LEADERSHIP & POSITIONS OF RESPONSIBILITY ═══ -->
+<section class="page-section" id="por">
+  <p class="section-label">Leadership &amp; Positions of Responsibility</p>
+  <div class="por-grid">
+
+    <div class="por-card">
+      <div class="por-logo-slot" onclick="triggerLogoUpload('logo-tpo')" title="Click to add logo">
+        <input type="file" id="logo-tpo" class="logo-input" accept="image/*" onchange="previewLogo(this)"/>
+        <div class="logo-placeholder">Logo</div>
+      </div>
+      <div class="por-role">Placement</div>
+      <div class="por-title">Internship Coordinator</div>
+      <div class="por-org">Training &amp; Placement Office, BASE University · Aug 2024 – May 2025</div>
+      <p class="por-desc">Led end-to-end execution of Catalyst24 — 250+ attendees, 15+ senior industry leaders. Designed SOPs to enhance placement efficiency and employer relations.</p>
+    </div>
+
+    <div class="por-card">
+      <div class="por-logo-slot" onclick="triggerLogoUpload('logo-ecell')" title="Click to add logo">
+        <input type="file" id="logo-ecell" class="logo-input" accept="image/*" onchange="previewLogo(this)"/>
+        <div class="logo-placeholder">Logo</div>
+      </div>
+      <div class="por-role">Entrepreneurship</div>
+      <div class="por-title">Campus Ambassador</div>
+      <div class="por-org">IIT Bombay Entrepreneurship Cell · Mar 2023 – Aug 2024</div>
+      <p class="por-desc">Championed entrepreneurial initiatives, engaging students in business ideation, case studies, and problem-solving programs.</p>
+    </div>
+
+    <div class="por-card">
+      <div class="por-logo-slot" onclick="triggerLogoUpload('logo-cult')" title="Click to add logo">
+        <input type="file" id="logo-cult" class="logo-input" accept="image/*" onchange="previewLogo(this)"/>
+        <div class="logo-placeholder">Logo</div>
+      </div>
+      <div class="por-role">Events</div>
+      <div class="por-title">Overall Coordinator</div>
+      <div class="por-org">Cultural Committee, BASE University · Mar 2023 – Aug 2024</div>
+      <p class="por-desc">Led 8 batch coordinators, directing Annual Day and Convocation logistics for 500+ participants across 20+ competitions and 15+ clubs.</p>
+    </div>
+
+    <div class="por-card">
+      <div class="por-logo-slot" onclick="triggerLogoUpload('logo-fund')" title="Click to add logo">
+        <input type="file" id="logo-fund" class="logo-input" accept="image/*" onchange="previewLogo(this)"/>
+        <div class="logo-placeholder">Logo</div>
+      </div>
+      <div class="por-role">Finance</div>
+      <div class="por-title">Founding Member &amp; Coordinator</div>
+      <div class="por-org">FUND BASE-U · Feb – Aug 2024</div>
+      <p class="por-desc">Raised ₹80,000 across 230+ students and corporate sponsors. Co-organised Inter-University Finance Summit drawing 400+ participants with speakers from top government and private bodies.</p>
+    </div>
+
+    <div class="por-card">
+      <div class="por-logo-slot" onclick="triggerLogoUpload('logo-lens')" title="Click to add logo">
+        <input type="file" id="logo-lens" class="logo-input" accept="image/*" onchange="previewLogo(this)"/>
+        <div class="logo-placeholder">Logo</div>
+      </div>
+      <div class="por-role">Creative</div>
+      <div class="por-title">Founder &amp; Coordinator</div>
+      <div class="por-org">LensPalette — Design &amp; Photography Club · Oct 2023 – Aug 2024</div>
+      <p class="por-desc">Established the university's first official design and photography club. Led university-wide event photography, branding, and digital content creation.</p>
+    </div>
+
+  </div>
+</section>
+
+<div class="full-divider"></div>
+
+<!-- ═══ PROFILE ═══ -->
+<section class="page-section" id="profile">
+  <p class="section-label">Profile</p>
+  <div class="profile-layout">
+
+    <!-- SIDEBAR -->
+    <div class="profile-sidebar">
+      <div class="photo-slot" id="photo-slot" onclick="document.getElementById('photo-input').click()" title="Click to add your photo">
+        <div class="photo-slot-label" id="photo-label">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+            <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
+            <circle cx="12" cy="7" r="4"/>
+          </svg>
+          <span>Add Photo</span>
+        </div>
+        <img id="photo-preview" src="" alt="Samartha Shastry" style="display:none"/>
+      </div>
+      <input type="file" id="photo-input" accept="image/*"/>
+
+      <div class="sidebar-name">Samartha Shastry</div>
+      <div class="sidebar-title">
+        M.Sc. Economics<br/>
+        Dr. B.R. Ambedkar School of Economics University<br/>
+        Bengaluru · Class of 2026
+      </div>
+
+      <div class="sidebar-links">
+        <a href="https://linkedin.com/in/samartha-shastry" target="_blank" class="sidebar-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+          LinkedIn ↗
+        </a>
+        <a href="https://github.com/SamarthaShastry" target="_blank" class="sidebar-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+          GitHub ↗
+        </a>
+        <a href="/cdn-cgi/l/email-protection#abd8cac6f4d8c3cad8dfd9d2ebd2cac3c4c485c8c4c6" class="sidebar-link">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <span class="__cf_email__" data-cfemail="9deefcf0c2eef5fceee9efe4dde4fcf5f2f2b3fef2f0">[email&#160;protected]</span>
+        </a>
+      </div>
+
+      <a href="https://drive.google.com/file/d/YOUR_RESUME_FILE_ID/view" target="_blank" class="resume-btn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download Resume
       </a>
-
-      <a href="https://baseblr-my.sharepoint.com/:f:/g/personal/215pge039_base_ac_in/IgDE7CGbyTU6SoKpuSulqU1pAaSkJbyzeEmLbAVrl_jEJBU?e=jwct3U" class="project-card">
-  <p class="project-type">Policy Reports</p>
-  <h3>KDEM Beyond Bengaluru - Cluster Vision Reports 2025</h3>
-  <p>Contributed to official vision reports for three Karnataka tech clusters - Hubballi-Dharwad-Belagavi, Mysuru, and Mangaluru - under the Karnataka Digital Economy Mission's Beyond Bengaluru initiative, covering strategic roadmaps for IT/ITES, GCCs, ESDM, and startup ecosystems.</p>
-  <div class="project-footer">
-    <div class="tags"><span class="tag">Policy</span><span class="tag">Government Consulting</span><span class="tag">Data Analysis</span></div>
-    <span class="arrow">→</span>
-  </div>
-</a>
-
-      <a href="https://baseblr-my.sharepoint.com/:b:/g/personal/215pge039_base_ac_in/IQDIKVieHr0NRLDylKhaATOsAZft-yagH6nM4JEFf_P61kk?e=z32QAL" class="project-card">
-  <p class="project-type">Research Project</p>
-  <h3>The Failure of Silicon Valley Bank: A Balance Sheet Analysis</h3>
-  <p>A comprehensive study applying balance sheet analytics to understand the systemic and managerial flaws behind SVB's collapse in March 2023, examining interest rate risk, liquidity mismanagement, and capital adequacy.</p>
-  <div class="project-footer">
-    <div class="tags"><span class="tag">Financial Analysis</span><span class="tag">Data Analysis</span><span class="tag">Macroeconomics</span></div>
-    <span class="arrow">→</span>
-  </div>
-</a>
-
-      <a href="https://baseblr-my.sharepoint.com/:f:/g/personal/215pge039_base_ac_in/IgA64Ei2Sda1T7DwMu-B7RNmAVc4_Lgj8Al-iBR3KTvlv2w?e=LvHwyh" class="project-card">
-  <p class="project-type">Startup Pitch Deck</p>
-  <h3>AeroGrid — AI-Powered Drone Traffic Management</h3>
-  <p>A pitch deck for AeroGrid, a UAV traffic management startup proposing an AI and blockchain-powered platform to manage India's rapidly growing drone ecosystem with real-time routing, DGCA compliance, and defence integration.</p>
-  <div class="project-footer">
-    <div class="tags"><span class="tag">Startup</span><span class="tag">Strategy</span><span class="tag">Drones</span><span class="tag">AI</span><span class="tag">Market Analysis</span></div>
-    <span class="arrow">→</span>
-  </div>
-</a>
-
-      <a href="https://baseblr-my.sharepoint.com/:b:/g/personal/215pge039_base_ac_in/IQDEHpHOcmKVRr_TFn2Uj-bMATikhD-Lm5jRZW1F8FjjS2k?e=JJoJDl" class="project-card">
-  <p class="project-type">Presentation Deck</p>
-  <h3>PeeSafe — International Expansion Strategy</h3>
-  <p>A strategic market entry analysis for PeeSafe's global expansion into the US, Europe, and GCC markets, integrating PESTEL analysis, Ansoff Matrix, distribution strategy, and financial projections to evaluate growth opportunities and profitability.</p>
-  <div class="project-footer">
-    <div class="tags"><span class="tag">Strategy</span><span class="tag">Market Entry</span><span class="tag">Global Expansion</span><span class="tag">Growth Strategy</span></div>
-    <span class="arrow">→</span>
-  </div>
-</a>
-
-      <a href="https://baseblr-my.sharepoint.com/:b:/g/personal/215pge039_base_ac_in/IQBcgqqwBYPnQ5ldHfqOOAzzASh_6JHiJ87nf6t14HEIumE?e=2ckevr" class="project-card">
-  <p class="project-type">Market Research Deck</p>
-  <h3>Corporate Training Market in Saudi Arabia</h3>
-  <p>A comprehensive market analysis of Saudi Arabia's corporate training sector, covering market size, growth drivers, segmentation, emerging trends, and strategic recommendations aligned with Vision 2030.</p>
-  <div class="project-footer">
-    <div class="tags"><span class="tag">Market Research</span><span class="tag">Market Profiling</span><span class="tag">Advance Research</span></div>
-    <span class="arrow">→</span>
-  </div>
-</a>
-
-      <a href="https://baseblr-my.sharepoint.com/:f:/g/personal/215pge039_base_ac_in/IgAjWp2e_MdYR7K0q2RDPL0hAUKZuzQUJz-7fNBFEb9Lz-A?e=GuQoaq" class="project-card">
-  <p class="project-type">Business Plan & Pitch Deck</p>
-  <h3>Cycleit — Campus Micro-Mobility Startup</h3>
-  <p>A full business plan and pitch deck for Cycleit, a solar-powered e-cycle rental service for Indian university campuses, including market research, financial projections, product design, and a mobile app prototype.</p>
-  <div class="project-footer">
-    <div class="tags"><span class="tag">Business Plan</span><span class="tag">Micro-Mobility</span><span class="tag">Business Strategy</span><span class="tag">Pitch Deck</span></div>
-    <span class="arrow">→</span>
-  </div>
-</a>
-
-      <a href="https://baseblr-my.sharepoint.com/:b:/g/personal/215pge039_base_ac_in/IQBrs5mod2JIQ6O9sm3RNqXVAfD8PAKdCSPDeNANNdCzV9Y?e=Q0nwHF" class="project-card">
-  <p class="project-type">Research Project</p>
-  <h3>Impact of Biases on Fintech Adoption Among Merchants</h3>
-  <p>A behavioural study across 90+ vendors in Bengaluru exploring how FOMO and Social Proof influence fintech adoption among small business owners and street vendors.</p>
-  <div class="project-footer">
-    <div class="tags"><span class="tag">Behavioural Economics</span><span class="tag">Fintech</span><span class="tag">Primary Research</span></div>
-    <span class="arrow">→</span>
-  </div>
-</a>
-
-      <a href="https://baseblr-my.sharepoint.com/:b:/g/personal/215pge039_base_ac_in/IQCQ7TOJACoJSL-rZZWPSMyCAaw-ri0ukOpdCUVKxEGbCTs?e=rf4JTm" class="project-card">
-  <p class="project-type">Research Project</p>
-  <h3>Forecasting India's External Commercial Borrowings</h3>
-  <p>Built and compared five time series forecasting models in R — including ARIMA — on monthly ECB data (2020–2023), evaluating performance using RMSE and MAE metrics.</p>
-  <div class="project-footer">
-    <div class="tags"><span class="tag">Time Series</span><span class="tag">R Programming</span><span class="tag">Forecasting</span></div>
-    <span class="arrow">→</span>
-  </div>
-</a>
-
     </div>
-  </section>
 
-  <div class="divider"></div>
+    <!-- MAIN CONTENT -->
+    <div class="profile-main">
+      <h2 class="profile-headline">Economist. Analyst.<br/><em>Strategist.</em></h2>
 
-  <!-- ABOUT -->
-  <section id="about">
-    <p class="section-label">About</p>
-    <div class="about-grid">
-      <div class="about-left">
-        <h2>Analyst. Researcher. <em>Storyteller.</em></h2>
+      <div class="profile-bio">
+        <p>
+          I am a final-year M.Sc. Economics student at Dr. B. R. Ambedkar School of Economics University, Bengaluru, graduating in 2026. My work sits at the intersection of <strong>applied economics, strategic analysis, and public policy</strong> — with a focus on translating rigorous research into decisions that are clear, defensible, and actionable.
+        </p>
+        <p>
+          I have contributed to the <strong>Karnataka Digital Economy Mission's (KDEM) Beyond Bengaluru initiative</strong>, co-authoring official cluster vision reports for three Karnataka tech hubs. My project work spans econometric research on India's supply chain realignment, GCC location strategy, international market entry, and financial risk analysis.
+        </p>
+        <p>
+          My ambition is to be part of <strong>India's growth story</strong> — to contribute, in a meaningful and lasting way, to the policies, strategies, and institutions that shape how this country competes, connects, and grows on the world stage. I want to work at the intersection of ideas and action: in the rooms where strategy is set, where trade is designed, and where economic futures are built.
+        </p>
       </div>
-      <div class="about-right">
-        <p>
-          I work at the intersection of data and communication — taking complex information and making it clear, visual, and actionable. My work spans Power BI dashboards, research publications, and strategic presentations.
-        </p>
-        <p>
-          I believe great analysis is only half the job. The other half is presenting it in a way that resonates with the audience and drives real decisions.
-        </p>
-        <div class="skills-list">
-          <span class="skill-pill">Power BI</span>
-          <span class="skill-pill">DAX</span>
-          <span class="skill-pill">Excel</span>
-          <span class="skill-pill">Research Design</span>
-          <span class="skill-pill">Data Visualization</span>
-          <span class="skill-pill">PowerPoint</span>
-          <span class="skill-pill">Statistical Analysis</span>
-          <span class="skill-pill">Storytelling</span>
+
+      <div class="caps-section">
+        <div class="caps-heading">Capabilities</div>
+        <div class="caps-grid">
+          <div class="cap-group">
+            <div class="cap-group-name">Research &amp; Analysis</div>
+            <div class="cap-items">
+              <span class="cap-item">Econometrics</span>
+              <span class="cap-item">Policy Research</span>
+              <span class="cap-item">Market Analysis</span>
+              <span class="cap-item">Financial Analysis</span>
+            </div>
+          </div>
+          <div class="cap-group">
+            <div class="cap-group-name">Tools &amp; Methods</div>
+            <div class="cap-items">
+              <span class="cap-item">R / Stata</span>
+              <span class="cap-item">Python</span>
+              <span class="cap-item">Power BI</span>
+              <span class="cap-item">Excel / Modelling</span>
+            </div>
+          </div>
+          <div class="cap-group">
+            <div class="cap-group-name">Strategy &amp; Communication</div>
+            <div class="cap-items">
+              <span class="cap-item">Government Consulting</span>
+              <span class="cap-item">International Strategy</span>
+              <span class="cap-item">Presentations &amp; Decks</span>
+              <span class="cap-item">Stakeholder Reporting</span>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+</section>
 
-  <div class="divider"></div>
 
-  <!-- CONTACT -->
-  <section id="contact">
-    <div class="contact-row">
-      <h2>Let's work<br/><em>together.</em></h2>
-      <div class="contact-links">
-        <a href="mailto:sam_shastry@yahoo.com">sam_shastry@yahoo.com</a>
-        <a href="https://linkedin.com/in/samartha-shastry" target="_blank">LinkedIn ↗</a>
-        <a href="https://github.com/SamarthaShastry" target="_blank">GitHub ↗</a>
-      </div>
-    </div>
-  </section>
+<footer>
+  <span>Samartha Shastry</span>
+  <div class="footer-right">
+    <a href="/cdn-cgi/l/email-protection#7a091b172509121b090e08033a031b12151554191517"><span class="__cf_email__" data-cfemail="7c0f1d11230f141d0f080e053c051d141313521f1311">[email&#160;protected]</span></a>
+    <span>© 2026</span>
+  </div>
+</footer>
 
-  <footer>
-    <span>© 2026 Samartha Shastry</span>
-    <span>Built with GitHub Pages</span>
-  </footer>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  /* ── Profile photo upload ── */
+  document.getElementById('photo-input').addEventListener('change', function(e) {
+    const file = e.target.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      const img = document.getElementById('photo-preview');
+      const label = document.getElementById('photo-label');
+      img.src = ev.target.result;
+      img.style.display = 'block';
+      label.style.display = 'none';
+    };
+    reader.readAsDataURL(file);
+  });
 
-</body>
-</html>
+  /* ── Org / club logo uploads ── */
+  function triggerLogoUpload(inputId) {
+    document.getElementById(inputId).click();
+  }
+
+  function previewLogo(input) {
+    const file = input.files[0];
+    if (!file) return;
+    const reader = new FileReader();
+    reader.onload = function(ev) {
+      const sl
